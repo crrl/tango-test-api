@@ -5,18 +5,21 @@ import { Request, Response, Router } from 'express';
 const router = Router();
 const { OK, METHOD_FAILURE } = StatusCodes;
 
-router.get('/:id', async (req: Request, res: Response) => {
+router.get('/:number', async (req: Request, res: Response) => {
     try {
         let result: number = 0;
         let sum: number = 0;
         let previousValue: number = 0;
         let currentValue: number = 1;
         
-        if(isNaN(+req.params.id)) throw('something went wrong.');
-        const valueParam = +req.params.id;
+        if(isNaN(+req.params.number)) throw('something went wrong.');
+        const valueParam = +req.params.number;
+
+        //Note: returns 0 because its the first number.
         if (valueParam === 0) {
             return res.status(OK).json({value: 0});
         }
+        //Note: returns 1 so we can simplify the logic for the next coming numbers without making the loop more complex.
         if (valueParam === 1 || valueParam === 2 ) {
             return res.status(OK).json({value: 1});
         }
